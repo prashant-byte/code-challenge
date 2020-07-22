@@ -17,6 +17,13 @@ public class Graph {
     private ArrayList<Integer> adj[];
     public Map<String, Integer> cities = new HashMap<>();
 
+    public Map<String, Integer> getCities() {
+        return cities;
+    }
+
+    public void setCities(Map<String, Integer> cities) {
+        this.cities = cities;
+    }
 
     public Graph(int v, Map<String, Integer> cities) {
         V = v;
