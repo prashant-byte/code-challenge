@@ -14,7 +14,7 @@ mvn spring-boot:run
 ```
 
 ## Usage
-Open browser and hit url  
+When the application is up and running, open browser and hit url  
 ```
 http://localhost:8080/connected?origin=boston&destination=newark
 ```
