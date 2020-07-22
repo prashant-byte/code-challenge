@@ -30,6 +30,14 @@ public class ChallengeService {
 
     private Graph cityGraph;
 
+    public Graph getCityGraph() {
+        return cityGraph;
+    }
+
+    public void setCityGraph(Graph cityGraph) {
+        this.cityGraph = cityGraph;
+    }
+
     @PostConstruct
     public void setUp() throws Exception {
         logger.info("Challenge Service Starting");
@@ -60,12 +68,13 @@ public class ChallengeService {
 
         if(origin == null || destination == null) return new ResponseEntity<>("No", HttpStatus.OK);
 
+        Graph cities = getCityGraph();
         try {
-            if(cityGraph.cities.containsKey(origin.toLowerCase()) &&
-                    cityGraph.cities.containsKey(destination.toLowerCase())) {
+            if(cities.getCities().containsKey(origin.toLowerCase()) &&
+                    cities.getCities().containsKey(destination.toLowerCase())) {
 
-                connected = cityGraph.reach(cityGraph.cities.get(origin.toLowerCase()),
-                        cityGraph.cities.get(destination.toLowerCase()));
+                connected = cities.reach(cities.getCities().get(origin.toLowerCase()),
+                        cities.getCities().get(destination.toLowerCase()));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -104,10 +113,10 @@ public class ChallengeService {
             }
         }
 
-        cityGraph = new Graph(cities.size(), cities);
+        setCityGraph(new Graph(cities.size(), cities));
         for (Map.Entry<String, String> entry : cityMap.entrySet()) {
-            cityGraph.addEdge(cities.get(entry.getKey()), cities.get(entry.getValue()));
-            cityGraph.addEdge(cities.get(entry.getValue()), cities.get(entry.getKey()));
+            getCityGraph().addEdge(cities.get(entry.getKey()), cities.get(entry.getValue()));
+            getCityGraph().addEdge(cities.get(entry.getValue()), cities.get(entry.getKey()));
 
         }
     }
