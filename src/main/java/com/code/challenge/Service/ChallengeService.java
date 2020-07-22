@@ -86,7 +86,7 @@ public class ChallengeService {
 
 
     /**
-     * This is the create Graph methos used to create graph of cities.
+     * This is the create Graph method used to create graph of cities.
      * @exception IOException On input error.
      * @see IOException
      */
