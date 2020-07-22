@@ -1,5 +1,6 @@
 package com.code.challenge.Service;
 
+import com.code.challenge.Defaults;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -57,6 +58,8 @@ public class ChallengeService {
     public ResponseEntity<String> connectedCities(String origin, String destination) {
         int connected = 0;
 
+        if(origin == null || destination == null) return new ResponseEntity<>("No", HttpStatus.OK);
+
         try {
             if(cityGraph.cities.containsKey(origin.toLowerCase()) &&
                     cityGraph.cities.containsKey(destination.toLowerCase())) {
@@ -82,7 +85,7 @@ public class ChallengeService {
         logger.info("Creating graph...");
         File file = null;
         // Read file content
-        file = ResourceUtils.getFile("classpath:city.txt");
+        file = ResourceUtils.getFile("classpath:" + Defaults.cityFile);
         BufferedReader br = new BufferedReader(new FileReader(file));
         Map<String, Integer> cities = new HashMap<>();
 
